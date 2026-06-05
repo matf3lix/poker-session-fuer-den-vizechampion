@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleine Poker-Session für den Vizechampion... :)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #game-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        h2 {
+            color: #333;
+        }
+        #puzzle-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h2 id="level-title">Ein kleines Rätsel für den Vizechampion...</h2>
+        <img id="puzzle-image" src="" alt="Bild">
+        
+        <div class="button-container">
+            <button onclick="checkAnswer('A')">A</button>
+            <button onclick="checkAnswer('B')">B</button>
+        </div>
+    </div>
+
+    <script>
+        // Bilder + richtige Antworten
+        const levels = [
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+1", answer: "A" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+2", answer: "B" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+3", answer: "A" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+4", answer: "B" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+5", answer: "A" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+6", answer: "B" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+7", answer: "A" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+8", answer: "A" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+9", answer: "B" },
+            { img: "https://via.placeholder.com/400x300?text=Raetsel+10", answer: "B" }
+        ];
+
+        // Link
+        const finalLink = "https://de.wikipedia.org"; 
+
+        let currentLevel = 0;
+
+        // UI aktualisieren
+        function updateUI() {
+            document.getElementById('puzzle-image').src = levels[currentLevel].img;
+            document.getElementById('level-title').innerText = `Ein kurze Poker-Session\nfür den Vizechampion ;)\n\nRunde ${currentLevel + 1} von 10:\nWer gewinnt?`;
+        }
+
+        // Antwort prüfen
+        function checkAnswer(guess) {
+            if (guess === levels[currentLevel].answer) {
+                // Spezialfall letzte Runde (index: rundenzahl - 1)
+                if (currentLevel === 9) {
+                    alert("Happy Birthday! Du hast dir den Titel 'Vizechampion' verdient! Du wirst nun weitergeleitet.");
+                    window.location.href = finalLink;
+                } else {
+                    // Nächste Runde
+                    currentLevel++;
+                    updateUI();
+                }
+            } else {
+                // Falsche Antwort
+                alert("Leider falsch, Thomas! So wird das nix mit dem nächsten Titel...");
+                currentLevel = 0;
+                updateUI();
+            }
+        }
+
+        // UI beim ersten Laden der Seite initialisieren
+        updateUI();
+    </script>
+
+</body>
+</html>
